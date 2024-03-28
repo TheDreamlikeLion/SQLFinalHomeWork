@@ -8,7 +8,7 @@ DROP FUNCTION IF EXISTS TransformSeconds;
 DELIMITER $$
 
 CREATE FUNCTION TransformSeconds(time_input int unsigned) RETURNS VARCHAR(250) DETERMINISTIC
-begin
+BEGIN
   DECLARE days_count int unsigned;
   DECLARE hours_count int unsigned;
   DECLARE mins_count int unsigned;
@@ -53,7 +53,7 @@ CREATE PROCEDURE FilteredNumbers(IN N1 INT, IN N2 INT, IN lim1 INT, IN lim2 INT)
 BEGIN
   DECLARE counter INT;
   SET counter 1;
-	CREATE temporary table if not exists filtered_numbers (num int);
+	CREATE TEMPORARY TABLE IF NOT EXISTS filtered_numbers (num int);
   WHILE counter <= 1000 DO
 		IF (counter % 15 = 0 OR counter % 33 = 0) THEN
 			INSERT INTO filtered_numbers (num)
