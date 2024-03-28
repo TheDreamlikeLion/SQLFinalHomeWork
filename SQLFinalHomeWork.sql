@@ -1,13 +1,13 @@
-## 1.Создайте функцию, которая принимает кол-во сек и далее переводит их в кол-во дней, часов, минут, секунд.
-## Пример: 123456 ->'1 days 10 hours 17 minutes 36 seconds '
+-- 1.Создайте функцию, которая принимает кол-во сек и далее переводит их в кол-во дней, часов, минут, секунд.
+-- Пример: 123456 ->'1 days 10 hours 17 minutes 36 seconds '
 
-CREATE database sql_home_work;
+CREATE DATABASE sql_home_work;
 USE sql_home_work;
 DROP FUNCTION IF EXISTS TransformSeconds;
 
 DELIMITER $$
 
-CREATE FUNCTION TransformSeconds(time_input int unsigned) RETURNS VARCHAR(250) DETERMINISTIC
+CREATE FUNCTION TransformSeconds(time_input int unsigned) RETURNS VARCHAR(100) DETERMINISTIC
 BEGIN
   DECLARE days_count int unsigned;
   DECLARE hours_count int unsigned;
@@ -43,8 +43,8 @@ SELECT TransformSeconds(173647);
 
 
 
-## 2.Cоздайте процедуру, которая выведет только числа, делящиеся на 15 или 33 в промежутке от 1 до 1000.
-## Пример: 15,30,33,45...
+-- 2.Cоздайте процедуру, которая выведет только числа, делящиеся на 15 или 33 в промежутке от 1 до 1000.
+-- Пример: 15,30,33,45...
 
 DROP PROCEDURE IF EXISTS FilteredNumbers;
 DROP TEMPORARY TABLE IF EXISTS filtered_numbers;
@@ -52,10 +52,10 @@ DELIMITER $$
 CREATE PROCEDURE FilteredNumbers(IN N1 INT, IN N2 INT, IN lim1 INT, IN lim2 INT)
 BEGIN
   DECLARE counter INT;
-  SET counter 1;
+  SET counter = lim1;
 	CREATE TEMPORARY TABLE IF NOT EXISTS filtered_numbers (num int);
-  WHILE counter <= 1000 DO
-		IF (counter % 15 = 0 OR counter % 33 = 0) THEN
+  WHILE counter <= lim2 DO
+		IF (counter % N1 = 0 OR counter % N2 = 0) THEN
 			INSERT INTO filtered_numbers (num)
 				VALUES (counter);
 		END IF;
